@@ -1,0 +1,44 @@
+📷 HOW TO ADD YOUR PROFESSIONAL PHOTO
+==========================================
+
+STEP 1: Save Your Photo
+------------------------
+1. Right-click on your professional photo
+2. Select "Save image as..." or "Save picture as..."
+3. Choose a location (like Desktop or Downloads)
+4. Name it "profile.jpg" (or "profile.png")
+
+STEP 2: Copy to Website Folder
+-------------------------------
+1. Navigate to your portfolio folder:
+   C:\Users\ZIA\portfolio-website\images\
+
+2. Copy your saved photo file into this folder
+
+3. Make sure it's named exactly "profile.jpg" (or update the HTML)
+
+STEP 3: Verify It's Working
+---------------------------
+1. Open your website (double-click index.html)
+2. You should see your professional photo in the hero section
+3. If you see a placeholder or broken image, check the file name matches
+
+ALTERNATIVE FILE NAMES:
+-----------------------
+If you want to use a different name, update line 59 in index.html:
+<img src="images/YOUR-FILE-NAME.jpg" alt="Zia UI Hassan" class="profile-img">
+
+SUPPORTED FORMATS:
+------------------
+- .jpg or .jpeg (recommended)
+- .png
+- .webp
+
+TIPS FOR BEST RESULTS:
+----------------------
+- Use a square image (same width and height)
+- Recommended size: 300x300 pixels or larger
+- Keep file size under 500KB for faster loading
+- Use high-quality, professional photos
+
+That's it! Your photo will now appear on your portfolio website.
