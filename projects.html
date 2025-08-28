@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Zia UI Hassan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Zia UI Hassan</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="experience.html" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link active">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>My Projects</h1>
+                <p>A showcase of my work and technical expertise</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Filter -->
+    <section class="projects-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ai">AI & Machine Learning</button>
+                <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+                <button class="filter-btn" data-filter="government">Government</button>
+                <button class="filter-btn" data-filter="business">Business</button>
+                <button class="filter-btn" data-filter="personal">Personal</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-showcase">
+        <div class="container">
+            <div class="projects-grid-enhanced">
+                <!-- Global Music Portal -->
+                <div class="project-card-enhanced" data-category="ai">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="https://globalmusicportal.ai" target="_blank" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <button class="action-btn" onclick="openProjectModal('music-portal')">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-icon-large">
+                            <i class="fas fa-music"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Global Music Portal</h3>
+                            <span class="project-status featured">Featured</span>
+                        </div>
+                        <p class="project-description">
+                            The world's first AI-powered music rating platform that provides unbiased ratings for songs uploaded by musicians. Revolutionary platform combining artificial intelligence with music industry expertise.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AI Integration</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">User Management</span>
+                            <span class="tech-tag">Analytics</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <span>1000+ Users</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-music"></i>
+                                <span>5000+ Songs Rated</span>
+                            </div>
+                        </div>
+                        <a href="https://globalmusicportal.ai" target="_blank" class="project-link">
+                            View Live Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Smart Examination Platform -->
+                <div class="project-card-enhanced" data-category="government">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="https://falcon-works.com" target="_blank" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <button class="action-btn" onclick="openProjectModal('exam-platform')">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-icon-large">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Smart Examination Platform</h3>
+                            <span class="project-status government">Government</span>
+                        </div>
+                        <p class="project-description">
+                            Comprehensive online examination system for UAE Government regulatory authority. Features automated testing, result management, certificate validation, and regulatory compliance dashboard.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Government Portal</span>
+                            <span class="tech-tag">Automated Testing</span>
+                            <span class="tech-tag">Certificate Management</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">Compliance</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fas fa-certificate"></i>
+                                <span>2000+ Certificates</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Government Grade Security</span>
+                            </div>
+                        </div>
+                        <a href="https://falcon-works.com" target="_blank" class="project-link">
+                            View Live Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- C2C Marketplace - Mazadi -->
+                <div class="project-card-enhanced" data-category="ecommerce">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="https://mazadi.com" target="_blank" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <button class="action-btn" onclick="openProjectModal('mazadi')">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-icon-large">
+                            <i class="fas fa-store"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>C2C Marketplace - Mazadi</h3>
+                            <span class="project-status ecommerce">E-commerce</span>
+                        </div>
+                        <p class="project-description">
+                            Advanced customer-to-customer classified ads platform enabling seamless buying and selling. Features comprehensive product management, user dashboards, and payment integration.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">E-commerce</span>
+                            <span class="tech-tag">Payment Integration</span>
+                            <span class="tech-tag">Search System</span>
+                            <span class="tech-tag">User Management</span>
+                            <span class="tech-tag">Mobile First</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>10k+ Products</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-handshake"></i>
+                                <span>500+ Transactions</span>
+                            </div>
+                        </div>
+                        <a href="https://mazadi.com" target="_blank" class="project-link">
+                            View Live Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- B2B E-commerce - Ali Optical -->
+                <div class="project-card-enhanced" data-category="ecommerce">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="https://www.alioptical.vision" target="_blank" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <button class="action-btn" onclick="openProjectModal('ali-optical')">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-icon-large">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>B2B E-commerce - Ali Optical</h3>
+                            <span class="project-status business">B2B</span>
+                        </div>
+                        <p class="project-description">
+                            Smart multi-vendor B2B optical shop system with advanced features. Comprehensive solution for optical businesses with inventory management and vendor controls.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">B2B Platform</span>
+                            <span class="tech-tag">Multi-vendor</span>
+                            <span class="tech-tag">Inventory System</span>
+                            <span class="tech-tag">Payment Gateway</span>
+                            <span class="tech-tag">Analytics</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fas fa-store"></i>
+                                <span>50+ Vendors</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-glasses"></i>
+                                <span>1000+ Products</span>
+                            </div>
+                        </div>
+                        <a href="https://www.alioptical.vision" target="_blank" class="project-link">
+                            View Live Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Arabian Wadi Transport -->
+                <div class="project-card-enhanced" data-category="business">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="https://arabianwadi.com" target="_blank" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <button class="action-btn" onclick="openProjectModal('arabian-wadi')">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-icon-large">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Arabian Wadi Transport LLC</h3>
+                            <span class="project-status business">Business</span>
+                        </div>
+                        <p class="project-description">
+                            Professional transport company website serving UAE since 2008. Modern design showcasing heavy & light truck transport solutions with service portfolios and client testimonials.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">SEO Optimized</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fas fa-calendar"></i>
+                                <span>15+ Years Service</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-award"></i>
+                                <span>100+ Clients</span>
+                            </div>
+                        </div>
+                        <a href="https://arabianwadi.com" target="_blank" class="project-link">
+                            View Live Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bali Wedding -->
+                <div class="project-card-enhanced" data-category="personal">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                <a href="https://bali-wedding.co.uk" target="_blank" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <button class="action-btn" onclick="openProjectModal('bali-wedding')">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-icon-large">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Bali Wedding</h3>
+                            <span class="project-status personal">Lifestyle</span>
+                        </div>
+                        <p class="project-description">
+                            Elegant wedding planning website featuring stunning visuals and comprehensive wedding services. Built with modern frameworks for optimal performance and beautiful user experience.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Nuxt.js</span>
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">Animation</span>
+                        </div>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <i class="fas fa-image"></i>
+                                <span>Beautiful Gallery</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Mobile Optimized</span>
+                            </div>
+                        </div>
+                        <a href="https://bali-wedding.co.uk" target="_blank" class="project-link">
+                            View Live Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Statistics -->
+    <section class="project-stats-section">
+        <div class="container">
+            <h2 class="section-title">Project Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>15+</h3>
+                    <p>Total Projects</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>10k+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>50k+</h3>
+                    <p>Lines of Code</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>∞</h3>
+                    <p>Cups of Coffee</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Let's collaborate and bring your ideas to life with cutting-edge web solutions.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Start a Project</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More About Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modals (Simple Implementation) -->
+    <div id="project-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Zia UI Hassan. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

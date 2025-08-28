@@ -20,43 +20,74 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scrolling for navigation links
+    // Multi-page navigation - only prevent default for hash links on same page
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            const href = this.getAttribute('href');
             
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70; // Account for fixed header
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+            // Only handle smooth scrolling for hash links on the same page
+            if (href.startsWith('#')) {
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    e.preventDefault();
+                    const offsetTop = targetSection.offsetTop - 70; // Account for fixed header
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             }
+            // For page navigation (.html files), let the browser handle normally
         });
     });
 
-    // Active navigation link highlighting
-    window.addEventListener('scroll', function() {
-        let current = '';
-        const sections = document.querySelectorAll('section');
+    // Set active navigation link based on current page
+    function setActiveNavLink() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
+            const linkHref = link.getAttribute('href');
+            
+            // Check if this link matches current page
+            if (linkHref === currentPage || 
+                (currentPage === '' && linkHref === 'index.html') ||
+                (currentPage === 'index.html' && linkHref === 'index.html')) {
                 link.classList.add('active');
             }
         });
-    });
+    }
+
+    // Set active link on page load
+    setActiveNavLink();
+
+    // For single-page sections, keep scroll-based active highlighting
+    if (document.querySelectorAll('section').length > 1) {
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // Only update active state for hash links on multi-section pages
+            if (current && window.location.pathname.endsWith('index.html')) {
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        link.classList.remove('active');
+                        if (href === '#' + current) {
+                            link.classList.add('active');
+                        }
+                    }
+                });
+            }
+        });
+    }
 
     // Navbar background change on scroll
     const navbar = document.querySelector('.navbar');
@@ -364,17 +395,299 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(loadingStyle);
     });
 
+    // Project Filtering (for projects page)
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card-enhanced');
+    
+    if (filterButtons.length > 0 && projectCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get filter value
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Filter projects
+                projectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || cardCategory === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
+    
+    // Project Modal Functionality
+    window.openProjectModal = function(projectId) {
+        const modal = document.getElementById('project-modal');
+        const modalBody = document.getElementById('modal-body');
+        
+        // Sample project data - in a real app this would come from a database
+        const projectData = {
+            'music-portal': {
+                title: 'Global Music Portal',
+                description: 'AI-powered music rating platform',
+                longDescription: 'The world\'s first AI-powered music rating platform that provides unbiased ratings for songs uploaded by musicians. This revolutionary platform combines artificial intelligence with music industry expertise to deliver fair and accurate song ratings.',
+                features: ['AI-powered rating system', 'User dashboard', 'Music upload functionality', 'Real-time analytics', 'Social sharing'],
+                technologies: ['JavaScript', 'AI/ML APIs', 'Node.js', 'MongoDB', 'Express.js'],
+                image: 'https://via.placeholder.com/600x400',
+                url: 'https://globalmusicportal.ai'
+            },
+            'exam-platform': {
+                title: 'Smart Examination Platform',
+                description: 'Government examination system',
+                longDescription: 'Comprehensive online examination system for UAE Government regulatory authority. Features automated testing, result management, certificate validation, and regulatory compliance dashboard.',
+                features: ['Automated testing', 'Result management', 'Certificate validation', 'Compliance dashboard', 'User management'],
+                technologies: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'Bootstrap'],
+                image: 'https://via.placeholder.com/600x400',
+                url: 'https://falcon-works.com'
+            }
+            // Add more projects as needed
+        };
+        
+        const project = projectData[projectId];
+        if (project) {
+            modalBody.innerHTML = `
+                <h2>${project.title}</h2>
+                <img src="${project.image}" alt="${project.title}" style="width: 100%; margin: 1rem 0; border-radius: 10px;">
+                <p class="project-description">${project.longDescription}</p>
+                <h3>Key Features:</h3>
+                <ul>
+                    ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
+                <h3>Technologies Used:</h3>
+                <div class="tech-tags">
+                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+                <div class="modal-actions">
+                    <a href="${project.url}" target="_blank" class="btn btn-primary">View Live Site</a>
+                </div>
+            `;
+            modal.style.display = 'block';
+        }
+    };
+    
+    window.closeProjectModal = function() {
+        const modal = document.getElementById('project-modal');
+        modal.style.display = 'none';
+    };
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+        const modal = document.getElementById('project-modal');
+        if (e.target === modal) {
+            closeProjectModal();
+        }
+    });
+    
+    // Enhanced form validation for contact page
+    const enhancedForm = document.querySelector('.contact-form-enhanced');
+    if (enhancedForm) {
+        const inputs = enhancedForm.querySelectorAll('input, textarea, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+    }
+    
+    function validateField(field) {
+        const value = field.value.trim();
+        const fieldName = field.name;
+        let isValid = true;
+        let errorMessage = '';
+        
+        // Remove existing error styling
+        field.classList.remove('error');
+        const existingError = field.parentNode.querySelector('.field-error');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Validate based on field type and requirements
+        if (field.hasAttribute('required') && !value) {
+            isValid = false;
+            errorMessage = 'This field is required';
+        } else if (fieldName === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                isValid = false;
+                errorMessage = 'Please enter a valid email address';
+            }
+        } else if (fieldName === 'phone' && value) {
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            if (!phoneRegex.test(value.replace(/[\s\-\(\)]/g, ''))) {
+                isValid = false;
+                errorMessage = 'Please enter a valid phone number';
+            }
+        }
+        
+        if (!isValid) {
+            field.classList.add('error');
+            const errorElement = document.createElement('span');
+            errorElement.className = 'field-error';
+            errorElement.textContent = errorMessage;
+            errorElement.style.cssText = 'color: #e74c3c; font-size: 0.8rem; margin-top: 0.25rem; display: block;';
+            field.parentNode.appendChild(errorElement);
+        }
+        
+        return isValid;
+    }
+    
+    // Skill progress bar animation for about page
+    const skillBars = document.querySelectorAll('.skill-progress');
+    if (skillBars.length > 0) {
+        const skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target;
+                    const targetWidth = progressBar.style.width;
+                    progressBar.style.width = '0';
+                    setTimeout(() => {
+                        progressBar.style.width = targetWidth;
+                        progressBar.style.transition = 'width 1.5s ease-in-out';
+                    }, 200);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+    }
+    
+    // Enhanced animations for the landing page
+    const enhancedAnimations = document.querySelectorAll('.overview-card, .interest-card, .stat-card');
+    if (enhancedAnimations.length > 0) {
+        const enhancedObserver = new IntersectionObserver(function(entries) {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.transition = 'all 0.6s ease';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        enhancedAnimations.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            enhancedObserver.observe(element);
+        });
+    }
+    
     // Console welcome message
     console.log(`
     🚀 Welcome to Zia UI Hassan's Portfolio!
     
     Thanks for checking out the code!
     
-    📧 Email: syedzis564@gmail.com
+    📧 Email: syed.zia560@gmail.com
     💼 Looking for opportunities in web development
     
     Have a great day! 😊
     `);
+    
+    // Add CSS for modal and enhanced features
+    const additionalStyles = document.createElement('style');
+    additionalStyles.textContent = `
+        .modal {
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #333;
+            background: #f0f0f0;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .modal-actions {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .field-error {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: block;
+        }
+        
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+    `;
+    document.head.appendChild(additionalStyles);
 });
 
 // Handle profile image error (fallback)
